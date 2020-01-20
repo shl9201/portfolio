@@ -1,0 +1,109 @@
+body,html{width:100%;height:100%;}
+*{margin:0;padding:0;}
+li{list-style: none;}
+.jackpot{width:100%;position: relative;}
+.jackpot>img{width:100%;position: absolute;z-index:-1;}
+.jackpot_cont{width:70%;margin:0 auto;max-width: 1920px;}
+.text{height: 20%;padding-top:37%;font-size: 185px;text-align: center;font-weight: 800}
+.numList{display: inline-block;padding-left:5%;}
+.numList>li{float: left;width:0px;height:170px;background-size: contain;background-repeat: no-repeat;position: relative;}
+.numList>li.class1{background-image: url(../image/number_1.png);}
+.numList>li.class2{background-image: url(../image/number_2.png);}
+.numList>li.class3{background-image: url(../image/number_3.png);}
+.numList>li.class4{background-image: url(../image/number_4.png);}
+.numList>li.class5{background-image: url(../image/number_5.png);}
+.numList>li.class6{background-image: url(../image/number_6.png);}
+.numList>li.class7{background-image: url(../image/number_7.png);}
+.numList>li.class8{background-image: url(../image/number_8.png);}
+.numList>li.class9{background-image: url(../image/number_9.png);}
+.numList>li.class0{background-image: url(../image/number_0.png);}
+.numList>li.comma{width:3%;}
+.numList>li.point{width:3%;}
+.numList>li.class1,.numList>li.class2,.numList>li.class3,.numList>li.class4,.numList>li.class5,.numList>li.class6,.numList>li.class7,.numList>li.class8,.numList>li.class9,.numList>li.class0{width:80px}
+h1{font-size: 140px;line-height: 1;color:#f4b83e;}
+.comma_img,.point_img{position: absolute;bottom:30px;left:50%;transform: translateX(-50%)}
+#comma,#point{width:3% !important;}
+.classundefined{visibility: hidden;}
+.comma_img{bottom:35px;}
+.point_img{bottom:45px;width:95%}
+
+.slides-container{position: relative;width:100%;height: 100%;}
+.slides-container>li{position: absolute;top:0;left:0;width:100%;height: 100%;display: none;}
+.slides-container>li:first-child{display: block;}
+
+.img{width:100%;}
+#video{width:100%;}
+@media screen and (max-width:1700px){
+    .comma_img, .point_img{bottom:30px;}
+}
+@media screen and (max-width:1550px){
+    .comma_img, .point_img{bottom:30px;}
+    h1{font-size: 120px;}
+}
+@media screen and (max-width:1510px){
+    .point_img{bottom:45px;width:65%}
+    
+}
+@media screen and (max-width:1400px){
+    .numList>li.class1,.numList>li.class2,.numList>li.class3,.numList>li.class4,.numList>li.class5,.numList>li.class6,.numList>li.class7,.numList>li.class8,.numList>li.class9,.numList>li.class0{width:70px}
+}
+@media screen and (max-width:1330px){
+    .comma_img, .point_img{bottom:50px;width:70%;}
+    .point_img{bottom:60px;}
+    h1{font-size: 110px;}
+}
+@media screen and (max-width:1200px){
+    .comma_img, .point_img{bottom:60px;}
+    h1{font-size: 100px;line-height: .7;}
+    .point_img{bottom:70px;}
+}
+@media screen and (max-width:1250px){
+    .numList>li.class1,.numList>li.class2,.numList>li.class3,.numList>li.class4,.numList>li.class5,.numList>li.class6,.numList>li.class7,.numList>li.class8,.numList>li.class9,.numList>li.class0{width:60px}
+    .comma_img, .point_img{bottom:70px}
+}
+@media screen and (max-width:1000px){
+    .comma_img, .point_img{bottom:70px;}
+    h1{font-size: 100px;}
+}
+@media screen and (max-width:1100px){
+    .comma_img, .point_img{bottom:70px;}
+    h1{font-size: 100px;}
+}
+@media screen and (max-width:1040px){
+    .numList>li.class1,.numList>li.class2,.numList>li.class3,.numList>li.class4,.numList>li.class5,.numList>li.class6,.numList>li.class7,.numList>li.class8,.numList>li.class9,.numList>li.class0{width:50px}
+    .comma_img, .point_img{bottom:80px}
+}
+@media screen and (max-width:950px){
+    .comma_img, .point_img{bottom:90px;}
+    h1{font-size: 85px;}
+}
+@media screen and (max-width:900px){
+    .comma_img, .point_img{bottom:90px;}
+    h1{font-size: 80px;}
+}
+@media screen and (max-width:880px){
+    .numList>li.class1,.numList>li.class2,.numList>li.class3,.numList>li.class4,.numList>li.class5,.numList>li.class6,.numList>li.class7,.numList>li.class8,.numList>li.class9,.numList>li.class0{width:40px}
+    .comma_img, .point_img{bottom:100px;}
+}
+
+@media screen and (max-width:800px){
+    .comma_img, .point_img{bottom:100px;}
+    h1{font-size: 60px;}
+}
+@media screen and (max-width:700px){
+    .numList>li.class1,.numList>li.class2,.numList>li.class3,.numList>li.class4,.numList>li.class5,.numList>li.class6,.numList>li.class7,.numList>li.class8,.numList>li.class9,.numList>li.class0{width:30px}
+    .comma_img, .point_img{bottom:120px}
+}
+@media screen and (max-width:650px){
+    .comma_img, .point_img{bottom:110px;}
+    h1{font-size: 50px;line-height: .5;}
+}
+@media screen and (max-width:550px){
+    .comma_img, .point_img{bottom:130px;}
+    h1{font-size: 50px;line-height: .5;}
+        .numList>li.class1,.numList>li.class2,.numList>li.class3,.numList>li.class4,.numList>li.class5,.numList>li.class6,.numList>li.class7,.numList>li.class8,.numList>li.class9,.numList>li.class0{width:25px}
+}
+@media screen and (min-width:2280px){
+    .numList{width:880px !important}
+    .text{padding-top:40%;}
+}
