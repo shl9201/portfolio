@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>data 가져오기</title>
+</head>
+
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+    <script>
+        function onSuccess(res) {
+            model = _.groupBy(res.data, 0)
+            makeModel(model);
+
+
+            function makeModel(model) {
+                for (var kind in model) {
+                    model[kind] = _.groupBy(model[kind], 1); // 리그별 뽑기
+
+                    selectLocale(model[kind]);
+                }
+            }
+
+            function selectLocale(kind) {
+                for (var locale in kind) {
+                    kind[locale] = _.groupBy(kind[locale], 3); // 리그 - 지역 뽑기
+
+                    // selectorWin(kind[locale]);
+                }
+            }
+
+            // function selectorWin(locale) {
+            //     for (var win in locale) {
+            //         locale[win] = _.groupBy(locale[win], 2) // 리그 - 지역 - 승 뽑기
+            //     }
+            // }
+
+            console.log(model)
+
+
+        };
+
+        // $.ajax("GET", url, onSuccess);
+
+        axios.get("/data/rankList.json")
+            .then(onSuccess);
+    </script>
+    <script>
+        lastOutput = {
+            "soccer": {
+                "kl": {
+                    "남부리그": [],
+                    "북부리그": []
+                }
+            },
+            "baseball": {
+                "kbo": []
+            }
+        };
+
+        var model1 = {
+            "soccer": [],
+            "baseball": []
+        };
+    </script>
+</body>
+
+</html>

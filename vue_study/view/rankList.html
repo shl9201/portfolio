@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>data 가져오기</title>
+    <link rel="stylesheet" href="../css/rankTest2.css">
+</head>
+
+<body>
+    <div id="app" class="contents">
+        <div class="tab_wrap">
+            <strong>리그별팀순위</strong>
+            <ul class="tab">
+                <li v-for="sport in sportList" v-cloak :class="{ 'active': sport == selected }" @click="choose(sport)">
+                    <a href="#" @click="clickSports(sport)">{{sport}}</a>
+                </li>
+            </ul>
+        </div>
+        <div class="tab-content">
+            <div class="league_tab">
+                <ul>
+                    <li v-for="league in leagueList" v-cloak><a href="#" @click="clickLeague(league)">{{league}}</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="league_contents" v-if="selectedSports !== null && selectedLeague !== null" v-cloak>
+                <table v-for="team in model[selectedSports][selectedLeague]">
+                    <caption v-if="team[0][3] !==''">{{team[0][3]}}</caption>
+                    <tr>
+                        <th>순위</th>
+                        <th>팀</th>
+                        <th>경기</th>
+                        <th>승</th>
+                        <th v-if="selectedSports == 'soccer' || selectedSports == 'baseball'">무</th>
+                        <th>패</th>
+                        <th
+                            v-if="selectedSports == 'soccer' || selectedSports == 'volleyball' || selectedSports == 'hockey'">
+                            승점</th>
+                        <th v-else>승률</th>
+                    </tr>
+                    <tr v-for="teamValue in team">
+                        <td>{{teamValue[5]}}</td>
+                        <td>{{teamValue[6]}}</td>
+                        <td>{{teamValue[7]}}</td>
+                        <td>{{teamValue[8]}}</td>
+                        <td v-if="selectedSports == 'soccer' || selectedSports == 'baseball'">{{teamValue[9]}}</td>
+                        <td>{{teamValue[10]}}</td>
+                        <td v-if="selectedSports == 'soccer'">{{teamValue[11]}}</td>
+                        <td
+                            v-else-if="selectedSports == 'baseball' || selectedSports == 'basketball' || selectedSports == 'football'">
+                            {{teamValue[15]}}</td>
+                        <td v-else>{{teamValue[14]}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <section v-if="errored">
+            <p>data를 못가져왔음~</p>
+        </section>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+    <script src="https://unpkg.com/vue@2"></script>
+    <script src="http://code.jquery.com/jquery.min.js"></script>
+    <script>
+        (function () {
+            new Vue({
+                data: {
+                    model: [],
+                    errored: false,
+                    selectedSports: null,
+                    selectedLeague: null,
+                    sportList: [],
+                    leagueList: [],
+                    selected: 'soccer'
+                },
+                methods: {
+                    ajaxCall: function () {
+                        axios.get('../data/rankList.json')
+                            .then(function (res) {
+                                // modeling --start
+                                this.model = this.makeModel(res.data, 0);
+                                // modeling --end
+                                this.sportList = Object.keys(this.model);
+                                this.clickSports(Object.keys(this.model)[0]);
+                                console.log(this.model);
+                            }.bind(this)).catch(function (e) {
+                                this.errored = true;
+                            })
+                    },
+                    makeModel: function (model) {
+                        model = _.groupBy(model, 0);
+                        for (var kind in model) {
+                            model[kind] = _.groupBy(model[kind], 1); // 리그별 뽑기
+                            this.selectLocale(model[kind]);
+                        }
+                        return model;
+                    },
+                    selectLocale: function (kind) {
+                        for (var locale in kind) {
+                            kind[locale] = _.groupBy(kind[locale], 3);
+                        }
+                    },
+                    clickSports: function (selectedSports) {
+                        this.selectedSports = selectedSports;
+                        this.clickLeague(Object.keys(this.model[selectedSports])[0]);
+                        this.leagueList = Object.keys(this.model[selectedSports]);
+                    },
+                    clickLeague: function (selectedLeague) {
+                        this.selectedLeague = selectedLeague;
+                    },
+                    choose: function (index) {
+                        this.selected = index;
+                    },
+                    array2Object: function (data) {
+                        // 
+                    }
+                },
+                mounted: function () {
+                    this.ajaxCall();
+                }
+            }).$mount("#app");
+            // })([{ el: "#app", src: "../data/rankList.json" }, { el: "#app2", src: "../data/rankList2.json" }]);
+        })([]);
+
+    </script>
+</body>
+
+</html>

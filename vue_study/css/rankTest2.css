@@ -1,0 +1,32 @@
+* {margin: 0;padding: 0;}
+[v-cloak] {
+    display: none;
+}
+li{list-style: none;}
+a {text-decoration: none;}
+.tab-content {clear: both;}
+.tab_wrap{width:500px;height:40px;background-color: #f7f7f7;border-bottom: 1px solid #ccc;}
+.tab_wrap>strong{float: left;line-height: 40px;font-size: 14px;}
+.tab_wrap>ul{float: right;line-height: 40px;}
+.tab>li {float: left;}
+.tab>li:first-child{border-left:1px solid #ccc;}
+.tab>li>a{color:#000;font-size: 11px;padding:0 5px;border-right:1px solid #ccc;border-top:1px solid #ccc;display: block;}
+table{width:100%;border-collapse: collapse;}
+.tab-content{width:500px;}
+td,th{text-align: center;font-size: 13px;height:30px;}
+table tr:first-child{background-color: #f7f7f7;border-top:1px solid #ccc;}
+table tr{border-bottom: 1px solid #ccc;}
+.active{background-color: #fff;}
+.active>a{font-weight: 800;color: #666 !important;}
+.league_tab>li{float: left;padding:0 5px;}
+tr:last-child{border:none;}
+
+.contents{width:500px;margin:0 auto;margin-top:30px;}
+.league_tab>ul>li{float: left;}
+.league_tab>ul>li>a{font-size: 12px;padding:0 5px;}
+.league_tab>ul>li:nth-child(1)>a{padding-left:0px;}
+.league_tab>ul+div{clear: both;}
+caption{background-color: rgb(234,234,234);font-size: 12px;border-top:1px solid #ccc;}
+
+.league_tab{height:40px;line-height: 40px;}
+.league_contents{border:1px solid #ccc;border-top:none;box-sizing: border-box;}

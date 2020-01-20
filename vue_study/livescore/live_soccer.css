@@ -1,0 +1,13 @@
+body{font-size: 13px;}
+td{text-align: center;}
+td,th{height:35px;}
+table{width:830px;border-collapse: collapse;}
+.daykey{background-color:#ddd;}
+caption{background-color: aqua;}
+.day{background-color: aquamarine}
+.up{cursor: pointer;width:23px;height: 35px;background-image: url(http://score888.com/image/s_up_icon2.png);display: block;border:none;background-color: #fff;outline:none;}
+#s_up_table .up{background-image: url(http://score888.com/image/s_down_icon2.png);}
+
+table tr:first-child{background-color: rgb(252,255,231);}
+table:first-child tr:first-child{background-color: #fff;}
+#s_up_table tr:first-child{background-color: #d4eaf5;}

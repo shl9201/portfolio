@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>전경기 라이브스코어</title>
+    <link rel="stylesheet" href="live_soccer.css">
+</head>
+
+<body>
+    <div id="soccerApp">
+        <table>
+            <colgroup>
+                <col width="27">
+                <col width="77">
+                <col width="69">
+                <col width="">
+                <col width="50">
+                <col width="">
+                <col width="37">
+                <col width="170">
+                <col width="23">
+            </colgroup>
+            <tbody>
+                <tr>
+                    <th></th>
+                    <th>리그명</th>
+                    <th>시간</th>
+                    <th>홈팀</th>
+                    <th>스코어</th>
+                    <th>원정팀</th>
+                    <th>전반</th>
+                    <th>데이터</th>
+                    <th>UP</th>
+                </tr>
+            </tbody>
+        </table>
+        <table v-for="(livegame,key) in liveGames">
+            <colgroup>
+                <col width="27">
+                <col width="77">
+                <col width="69">
+                <col width="">
+                <col width="50">
+                <col width="">
+                <col width="37">
+                <col width="170">
+                <col width="23">
+            </colgroup>
+            <tr>
+                <th colspan="9">{{key}}</th>
+            </tr>
+            <tr v-for="livegameValue in livegame">
+                <td><input type="checkbox"></td>
+                <td>{{livegameValue.tournament_name_ko}}</td>
+                <td>{{livegameValue.starttime.substring(0,5)}}</td>
+                <td>{{livegameValue.team1.name}}</td>
+                <td>-</td>
+                <td>{{livegameValue.team2.name}}</td>
+                <td></td>
+                <td><a href="#"><img src="http://score888.com/image/new/data_pre.png" alt=""></a><a href="#"><img
+                            src="http://score888.com/image/btn_widget.png" alt=""></a><a href="#"><img
+                            src="http://score888.com/image/new/cheer_btn.png" alt=""></a></td>
+                <td></td>
+            </tr>
+            <!-- <tr is="my-list" v-for="livegameValue in livegame" :key="livegameValue.id"
+                :tournament_name_ko="livegameValue.tournament_name_ko" :starttime="livegameValue.starttime"
+                :team1="livegameValue.team1" :team2="livegameValue.team2" v-on:up-fnc="upFncView">
+            </tr> -->
+        </table>
+        <table v-for="(resultgame,key) in resultGames">
+            <colgroup>
+                <col width="27">
+                <col width="77">
+                <col width="69">
+                <col width="">
+                <col width="50">
+                <col width="">
+                <col width="37">
+                <col width="170">
+                <col width="23">
+            </colgroup>
+            <tr>
+                <th colspan="9">{{key}}</th>
+            </tr>
+            <tr v-for="resultgameValue in resultgame">
+                <td><input type="checkbox"></td>
+                <td>{{resultgameValue.tournament_name_ko}}</td>
+                <td>{{resultgameValue.starttime.substring(0,5)}}</td>
+                <td>{{resultgameValue.team1.name}}</td>
+                <td>-</td>
+                <td>{{resultgameValue.team2.name}}</td>
+                <td></td>
+                <td><a href="#"><img src="http://score888.com/image/new/data_pre.png" alt=""></a><a href="#"><img
+                            src="http://score888.com/image/btn_widget.png" alt=""></a><a href="#"><img
+                            src="http://score888.com/image/new/cheer_btn.png" alt=""></a></td>
+                <td><img src="http://score888.com/image/s_up_icon2.png" alt="" class="up"></td>
+            </tr>
+        </table>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+    <script src="https://unpkg.com/vue@2"></script>
+    <script src="live_soccer.js"></script>
+
+    <!-- 
+    <script type="text/x-template" id="list-template">
+        <tr v-if="trShow">
+            <td><input type="checkbox"></td>
+            <td>{{tournament_name_ko}}</td>
+            <td>{{starttime.substring(0,5)}}</td>
+            <td>{{team1.name}}</td>
+            <td>-</td>
+            <td>{{team2.name}}</td>
+            <td></td>
+            <td><a href="#"><img src="http://score888.com/image/new/data_pre.png" alt=""></a><a href="#"><img
+                        src="http://score888.com/image/btn_widget.png" alt=""></a><a href="#"><img
+                        src="http://score888.com/image/new/cheer_btn.png" alt=""></a></td>
+            <td><button type="button" @click="upFnc()" class="up"></button></td>
+        </tr>
+    </script>
+
+     -->
+    <script>
+
+        // Vue.component('my-list', {
+        //     data: function () {
+        //         return {
+        //             trShow: true
+        //         }
+        //     },
+        //     template: '#list-template',
+        //     props: ['tournament_name_ko', 'starttime', 'team1', 'team2'],
+        //     methods: {
+        //         upFnc: function () {
+        //             // this.$emit('up-fnc');
+        //             // this.$emit('down-fnc');
+        //             // this.trShow = false;
+        //         }
+        //     }
+        // });
+        new Vue({
+            data: {
+                model: [],
+                liveGames: [],
+                resultGames: [],
+                errored: false
+            },
+            methods: {
+                ajaxCall: function () {
+                    axios.get('ajax_get_sportradar.json')
+                        .then(function (res) {
+                            var model = _.groupBy(res.data, 'status.name'),
+                                resultGames = [], liveGames = [];
+                            // this.model = _.groupBy(res.data, 'status.name');//this.makeModel(res.data, 'status.name');
+                            // this.resultGames = this.model['경기종료'];
+                            for (var status in model) {
+                                if (status === "경기 종료") {
+                                    resultGames = _.concat(resultGames, model[status]);
+                                }
+                                else {
+                                    liveGames = _.concat(liveGames, model[status]);
+                                }
+                            }
+
+                            //
+                            this.resultGames = _.groupBy(resultGames, function (b) {
+                                return b.match_date.substring(0, 10);
+                            });
+                            this.liveGames = _.groupBy(liveGames, function (b) {
+                                return b.match_date.substring(0, 10);
+                            });
+                            this.model = this.makeModel(model);
+
+                            console.log(this.model);
+                        }.bind(this)).catch(function (e) {
+                            this.errored = true;
+                        })
+                },
+                makeModel: function (model) {
+                    // model = _.groupBy(model, 'status.name');
+                    for (var kind in model) {
+                        model[kind] = _.groupBy(model[kind], function (b) { return b.match_date.substring(0, 10) }); // 요일별 뽑기
+                    }
+                    return model;
+                }
+            },
+            mounted: function () {
+                this.ajaxCall();
+            }
+        }).$mount("#soccerApp");
+    </script>
+</body>
+
+</html>
