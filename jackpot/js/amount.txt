@@ -1,1 +1,3 @@
-var amount = '4668.90';
+var amount = '4668.01';
+var total_prize = '23456789';
+var first_prize = '456.01';

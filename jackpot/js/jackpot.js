@@ -1,67 +1,84 @@
 $(function () {
-    var widthFnc = function () {
-        var $liList = $('#numList').children('li');
-        var $liList2 = $('#numList2').children('li');
-        var sum = 0, sum2 = 0;
-        if ($liList.hasClass('classundefined')) {
-            $('.classundefined').css({
+    function widthFnc(e) {
+        var $liList = $(e).children('li');
+        var sum = 0;
+        if ($liList.hasClass('classhidden')) {
+            $('.classhidden').css({
                 width: 0
             })
         }
         for (var i = 0; i < $liList.length; i++) {
-            sum += $('#numList>li').eq(i).width()
+            sum += $liList.eq(i).width()
         }
-        for (var i = 0; i < $liList2.length; i++) {
-            sum2 += $('#numList2>li').eq(i).width()
-        }
-        $('#numList').css({
+        $(e).css({
             width: sum + 80
         })
-        $('#numList2').css({
-            width: sum2 + 80
-        })
-    }
-    var fn = function (amount) {
+    };
+
+    function fn(amount, e, name) {
         var numComma = numberFormat(amount),
             num = [], count = 0,
-            $numList = $('#numList'),
-            $numList2 = $('#numList2'),
+            $numList = $(e),
             $li = $numList.children('li'),
-            $li2 = $numList2.children('li'),
-            max = $li.length,
-            max2 = $li2.length;
+            max = $li.length;
 
         for (var i = numComma.length - 1; i >= 0; i--) {
             num.push(numComma[i]);
         }
-
-        for (var i = max2 - 1; i >= 0; i-- , count++) {
-            $li[i].className = 'class' + num[count]
-            $li2[i].className = 'class' + num[count]
+        for (var i = max - 1; i >= 0; i-- , count++) {
+            if (typeof num[count] !== 'undefined') {
+                if (num[count] == ',') {
+                    $li[i].className = 'comma';
+                } else if (num[count] == '.') {
+                    $li[i].className = 'point';
+                } else {
+                    $li[i].className = name + num[count];
+                }
+            } else {
+                $li[i].className = name + 'hidden';
+            }
         }
-    }(amount);
+    } (amount);
+
+    fn(amount, '#numList', 'class');
+    fn(total_prize, '#list1', 'p_class');
+    fn(first_prize, '#list2', 'p_class');
 
     function numberFormat(e) {
         return e.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    };
+
+    $(window).on('resize load', function () {
+        widthFnc('#numList');
+    });
+
+    function listw(e) {
+        var len = $(e).find('.p_classhidden');
+        $(e).css({
+            'margin-left': len.length * 4 + '%'
+        })
+    };
+
+    for (var i = 1; i <= 2; i++) {
+        listw('#list' + i);
     }
-
-    $(window).resize(function () {
-        widthFnc()
-    })
-    $(window).load(function () {
-        widthFnc()
-    })
-
 });
 
 $(function () {
     var $maincont = $(".slides-container>li");
-    var mainidx = 0, maxIdx = 7, time = 3000;
+    var mainidx = 0, maxIdx = 9, unit_clear_time = 10000, basic_clear_time = 3 * unit_clear_time;
     var video = document.getElementById('video')
     var timer = null;
 
     function move() {
-        $maincont.eq(mainidx).fadeIn().siblings().fadeOut();
+        var idx = mainidx,
+            key = 7;
+
+        if (mainidx > key) {
+            idx -= key;
+        }
+
+        $maincont.eq(idx).fadeIn().siblings().fadeOut();
     }
     function clear(sec) {
         clearInterval(timer)
@@ -84,24 +101,21 @@ $(function () {
         } else {
             video.pause();
         }
-        if (mainidx == 1 || mainidx == 7) {
-            clear(30000)
+        if (mainidx == 1 || mainidx == 2 || mainidx == 8 || mainidx == 9) {
+            clear(basic_clear_time);
         } else if (mainidx == 0) {
-            clear(30000)
-        } else if (mainidx == 2 || mainidx == 3 || mainidx == 4 || mainidx == 5 || mainidx == 6) {
-            clear(10000)
+            clear(basic_clear_time);
+        } else if (mainidx == 3 || mainidx == 4 || mainidx == 5 || mainidx == 6 || mainidx == 7) {
+            clear(unit_clear_time);
         }
     };
-    $(window).resize(function () {
+    $(window).on('resize load', function () {
         $('.slides-container').css({
             height: $(window).height()
         })
     })
     $(window).load(function () {
-        $('.slides-container').css({
-            height: $(window).height()
-        })
-        clear(30000)
-
+        clear(basic_clear_time);
     })
+    move();
 })

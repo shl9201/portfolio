@@ -17,27 +17,76 @@ li{list-style: none;}
 .numList>li.class8{background-image: url(../image/number_8.png);}
 .numList>li.class9{background-image: url(../image/number_9.png);}
 .numList>li.class0{background-image: url(../image/number_0.png);}
-.numList>li.comma{width:3%;}
-.numList>li.point{width:3%;}
+.numList>li.comma{background-image: url(../image/number_comma.png);background-size: contain;width:3.5%;background-position: center 110px;}
+.numList>li.point{background-image: url(../image/number_period.png);background-size: contain;width:3.5%;background-position: center 110px;}
 .numList>li.class1,.numList>li.class2,.numList>li.class3,.numList>li.class4,.numList>li.class5,.numList>li.class6,.numList>li.class7,.numList>li.class8,.numList>li.class9,.numList>li.class0{width:80px}
 h1{font-size: 140px;line-height: 1;color:#f4b83e;}
-.comma_img,.point_img{position: absolute;bottom:30px;left:50%;transform: translateX(-50%)}
-#comma,#point{width:3% !important;}
-.classundefined{visibility: hidden;}
-.comma_img{bottom:35px;}
-.point_img{bottom:45px;width:95%}
+.classhidden{visibility: hidden;}
 
 .slides-container{position: relative;width:100%;height: 100%;}
 .slides-container>li{position: absolute;top:0;left:0;width:100%;height: 100%;display: none;}
 .slides-container>li:first-child{display: block;}
 
+.clearfix{zoom:1}
+.clearfix:after{content: '';clear: both;display: block;}
+.prize{width:100%;position: relative;}
+.prize>img{width:100%;position: absolute;z-index:-1;}
+
+.com_prize{width:50%;margin:0 auto;}
+.total_prize>ul{padding-top:53%;}
+.king_prize>ul{padding-top:14%;}
+.com_prize>ul>li{float: left;width:85px;background-repeat: no-repeat;background-size: contain;height: 131px;background-position: center bottom;}
+.list>li.p_class1{background-image: url(../image/number/number_1.png);}
+.list>li.p_class2{background-image: url(../image/number/number_2.png);}
+.list>li.p_class3{background-image: url(../image/number/number_3.png);}
+.list>li.p_class4{background-image: url(../image/number/number_4.png);}
+.list>li.p_class5{background-image: url(../image/number/number_5.png);}
+.list>li.p_class6{background-image: url(../image/number/number_6.png);}
+.list>li.p_class7{background-image: url(../image/number/number_7.png);}
+.list>li.p_class8{background-image: url(../image/number/number_8.png);}
+.list>li.p_class9{background-image: url(../image/number/number_9.png);}
+.list>li.p_class0{background-image: url(../image/number/number_0.png);}
+.list>li.comma{background-image: url(../image/number/number_comma.png);background-position: bottom;width:2%;}
+.list>li.point{background-image: url(../image/number/number_period.png);background-position: bottom;width:2%;}
 .img{width:100%;}
 #video{width:100%;}
-@media screen and (max-width:1700px){
-    .comma_img, .point_img{bottom:30px;}
+.p_classhidden{display: none;}
+
+@media screen and (max-width:1680px){
+    .com_prize>ul>li{width:80px}
+    .king_prize>ul{padding-top:9%;}
 }
+@media screen and (max-width:1515px){
+    .com_prize>ul>li{width:70px}
+    .total_prize>ul{padding-top:50%;}
+}
+@media screen and (max-width:1400px){
+    .com_prize>ul>li{width:60px}
+    .total_prize>ul{padding-top:48%;}
+}
+@media screen and (max-width:1300px){
+    .com_prize>ul>li{width:50px}
+    .total_prize>ul{padding-top:45%;}
+}
+@media screen and (max-width:1250px){
+    .king_prize>ul{padding-top:5%;}
+}
+@media screen and (max-width:1120px){
+    .com_prize>ul>li{width:40px}
+    .total_prize>ul{padding-top:41%;}
+    .king_prize>ul{padding-top:4%;}
+}
+@media screen and (max-width:1020px){
+    .total_prize>ul{padding-top:40%;}
+    .king_prize>ul{padding-top:0}
+}
+@media screen and (max-width:900px){
+    .com_prize>ul>li{height: 121px;}
+}
+
+
 @media screen and (max-width:1550px){
-    .comma_img, .point_img{bottom:30px;}
+    .comma, .point{bottom:10px;}
     h1{font-size: 120px;}
 }
 @media screen and (max-width:1510px){
@@ -48,58 +97,50 @@ h1{font-size: 140px;line-height: 1;color:#f4b83e;}
     .numList>li.class1,.numList>li.class2,.numList>li.class3,.numList>li.class4,.numList>li.class5,.numList>li.class6,.numList>li.class7,.numList>li.class8,.numList>li.class9,.numList>li.class0{width:70px}
 }
 @media screen and (max-width:1330px){
-    .comma_img, .point_img{bottom:50px;width:70%;}
+    .comma, .point{bottom:30px;width:70%;}
     .point_img{bottom:60px;}
     h1{font-size: 110px;}
 }
-@media screen and (max-width:1200px){
-    .comma_img, .point_img{bottom:60px;}
+@media screen and (max-width:1300px){
+    .comma, .point{bottom:20px;}
     h1{font-size: 100px;line-height: .7;}
     .point_img{bottom:70px;}
 }
 @media screen and (max-width:1250px){
     .numList>li.class1,.numList>li.class2,.numList>li.class3,.numList>li.class4,.numList>li.class5,.numList>li.class6,.numList>li.class7,.numList>li.class8,.numList>li.class9,.numList>li.class0{width:60px}
-    .comma_img, .point_img{bottom:70px}
+    .comma, .point{bottom:40px}
 }
 @media screen and (max-width:1000px){
-    .comma_img, .point_img{bottom:70px;}
     h1{font-size: 100px;}
 }
 @media screen and (max-width:1100px){
-    .comma_img, .point_img{bottom:70px;}
     h1{font-size: 100px;}
 }
 @media screen and (max-width:1040px){
     .numList>li.class1,.numList>li.class2,.numList>li.class3,.numList>li.class4,.numList>li.class5,.numList>li.class6,.numList>li.class7,.numList>li.class8,.numList>li.class9,.numList>li.class0{width:50px}
-    .comma_img, .point_img{bottom:80px}
 }
 @media screen and (max-width:950px){
-    .comma_img, .point_img{bottom:90px;}
     h1{font-size: 85px;}
 }
 @media screen and (max-width:900px){
-    .comma_img, .point_img{bottom:90px;}
+    .comma, .point{bottom:60px;}
     h1{font-size: 80px;}
 }
 @media screen and (max-width:880px){
     .numList>li.class1,.numList>li.class2,.numList>li.class3,.numList>li.class4,.numList>li.class5,.numList>li.class6,.numList>li.class7,.numList>li.class8,.numList>li.class9,.numList>li.class0{width:40px}
-    .comma_img, .point_img{bottom:100px;}
 }
 
 @media screen and (max-width:800px){
-    .comma_img, .point_img{bottom:100px;}
     h1{font-size: 60px;}
 }
 @media screen and (max-width:700px){
     .numList>li.class1,.numList>li.class2,.numList>li.class3,.numList>li.class4,.numList>li.class5,.numList>li.class6,.numList>li.class7,.numList>li.class8,.numList>li.class9,.numList>li.class0{width:30px}
-    .comma_img, .point_img{bottom:120px}
 }
 @media screen and (max-width:650px){
-    .comma_img, .point_img{bottom:110px;}
+    .comma, .point{bottom:70px;}
     h1{font-size: 50px;line-height: .5;}
 }
 @media screen and (max-width:550px){
-    .comma_img, .point_img{bottom:130px;}
     h1{font-size: 50px;line-height: .5;}
         .numList>li.class1,.numList>li.class2,.numList>li.class3,.numList>li.class4,.numList>li.class5,.numList>li.class6,.numList>li.class7,.numList>li.class8,.numList>li.class9,.numList>li.class0{width:25px}
 }
