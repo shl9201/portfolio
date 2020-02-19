@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Calendar</title>
+</head>
+
+<body>
+    <div id="app">
+        <h1>Calendar <span>✿˘◡˘✿</span></h1>
+        <div class="title">
+            <h2>{{year}}년</h2>
+            <p>{{month}}</p>
+        </div>
+        <div class="btn">
+            <button type="button" @click="prevdate">◀</button>
+            <button type="button" @click="nextdate">▶</button>
+        </div>
+        <ul class="list clearfix">
+            <li v-for="week in weekday">{{week}}</li>
+        </ul>
+        <ul class="list cont clearfix">
+            <li v-for="day in days" :class="day.class">{{day.result}}</li>
+        </ul>
+        <div class="serch">
+            년도 검색 : <input type="text" v-model="msg" id="serch" ref="search">
+            <button type="button" @click="serch">검색</button>
+        </div>
+    </div>
+    <link rel="stylesheet" href="css/calendar.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="http://code.jquery.com/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.0/moment.min.js"></script>
+    <script src="js/moment-width-locales.js"></script>
+    <script src="js/calendar.js"></script>
+</body>
+
+</html>
