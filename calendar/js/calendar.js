@@ -9,7 +9,8 @@ $(function () {
             chkday: 1,
             prevday: [],
             nextday: [],
-            msg: ''
+            msg: '',
+            daymsg: ''
         },
         methods: {
             setLang: function () {
@@ -28,6 +29,7 @@ $(function () {
             },
             prevdate: function () {
                 var prev = this.m.subtract(1, 'months').calendar('ddd/MM/YYYY');
+                console.log(prev)
                 this.setdate(prev);
                 this.pushdate(prev);
                 this.chkday--;
@@ -104,7 +106,21 @@ $(function () {
                     this.pushdate(this.msg);
                     this.today();
                 }
-                this.msg = '';
+            },
+            dayserch: function () {
+                if (this.daymsg <= 0 || this.daymsg >= 13) {
+                    alert('1월~12월 까지 있습니다.');
+                    this.daymsg = '';
+                    this.$refs.daysearch.focus();
+                } else {
+                    this.m = moment(this.msg);
+                    var num = moment(this.msg).format('YYYY') + '.' + this.daymsg + '.' + moment(this.msg).format('DD');
+                    console.log(num)
+                    this.setdate(num);
+                    this.pushdate(num);
+                    this.today();
+                }
+                this.daymsg = ''
             }
         },
         mounted: function () {

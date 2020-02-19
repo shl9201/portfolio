@@ -27,7 +27,9 @@
         </ul>
         <div class="serch">
             년도 검색 : <input type="text" v-model="msg" id="serch" ref="search">
-            <button type="button" @click="serch">검색</button>
+            <button type="button" @click="serch">검색</button><br>
+            월 검색 : <input type="text" v-model="daymsg" id="dayserch" ref="daysearch">
+            <button type="button" @click="dayserch">검색</button>
         </div>
     </div>
     <link rel="stylesheet" href="css/calendar.css">
