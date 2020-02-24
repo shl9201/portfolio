@@ -29,20 +29,29 @@ $(function () {
                     this.days[i] = { result: i + 1, class: '' };
                 }
                 this.setday(name);
+
+                var year = moment().format('YYYY');
+                var month = moment().format('M');
+                if (this.year == year && this.month == month + '월') {
+                    this.chkday = 1;
+                }
+                for (var i = 0; i < daylen; i++) {
+                    if (this.days[i].result == moment().format('DD') && this.chkday == 1 && this.year == year && this.month == month + '월') {
+                        this.days[i].class = 'today';
+                    }
+                }
             },
             prevdate: function () {
                 var prev = this.m.subtract(1, 'months').calendar('ddd/MM/YYYY');
+                this.chkday--;
                 this.setdate(prev);
                 this.pushdate(prev);
-                this.chkday--;
-                this.today();
             },
             nextdate: function () {
                 var next = this.m.add(1, 'months').calendar('ddd/MM/YYYY');
+                this.chkday++;
                 this.setdate(next);
                 this.pushdate(next);
-                this.chkday++;
-                this.today();
             },
             setday: function (name) {
                 this.year = moment(name).format('YYYY');
@@ -80,19 +89,6 @@ $(function () {
                 }
                 $('.cont>li.sun').prev().css('color', 'royalblue');
             },
-            today: function () {
-                var daylen = moment().daysInMonth();
-                var year = moment().format('YYYY');
-                var month = moment().format('M');
-                if (this.year == year && this.month == month + '월') {
-                    this.chkday = 1;
-                }
-                for (var i = 0; i < daylen; i++) {
-                    if (this.days[i].result == moment().format('DD') && this.chkday == 1 && this.year == year && this.month == month + '월') {
-                        this.days[i].class = 'today';
-                    }
-                }
-            },
             setSelect: function () {
                 var m = moment();
                 var date1 = moment().format('YYYY');
@@ -115,25 +111,22 @@ $(function () {
                 this.m = moment(this.selected);
                 this.setdate(this.selected);
                 this.pushdate(this.selected);
-                this.today();
             },
             daySelect: function () {
-                this.m = moment(this.selected + this.dayselected, 'YYYYMM');
+                this.m = moment(this.selected + this.dayselected, 'YYYY/MM');
                 var daynum = this.dayselected + '/' + moment(this.selected).format('DD') + '/' + moment(this.selected).format('YYYY');
                 if (this.dayselected.length == 1) {
                     daynum = this.dayselected + '/' + moment(this.selected).format('DD') + '/' + moment(this.selected).format('YYYY');
                 } else {
-                    daynum = this.dayselected + '/' + moment(this.selected).format('DD') + '/' + moment(this.selected).format('YYYY');
+                    daynum = '0' + this.dayselected + '/' + moment(this.selected).format('DD') + '/' + moment(this.selected).format('YYYY');
                 }
                 this.setdate(daynum);
                 this.pushdate(daynum);
-                this.today();
             }
         },
         mounted: function () {
             this.setLang();
             this.setdate();
-            this.today();
             this.pushdate();
             this.setSelect();
         }
