@@ -27,3 +27,5 @@ h2{text-shadow: 1px 3px #ccc;}
 .serch>button:hover{background-color: #cd3f3e;}
 .cont>li{font-family: 'M PLUS 1p', sans-serif;font-size: 14px;}
 #dayserch{margin-top:20px;}
+.sel{text-align: center;margin-top:30px;}
+.sel>p,.serch>p{padding-bottom: 10px;color:#cd3f3e;font-weight: 800;}

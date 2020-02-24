@@ -25,11 +25,14 @@
         <ul class="list cont clearfix">
             <li v-for="day in days" :class="day.class">{{day.result}}</li>
         </ul>
-        <div class="serch">
-            년도 검색 : <input type="text" v-model="msg" id="serch" ref="search">
-            <button type="button" @click="serch">검색</button><br>
-            월 검색 : <input type="text" v-model="daymsg" id="dayserch" ref="daysearch">
-            <button type="button" @click="dayserch">검색</button>
+        <div class="sel">
+            <p>Selectbox로 선택하기</p>
+            <select name="sel" id="sel" v-model="selected" v-on:change="yearSelect">
+                <option :value="item" v-for="item in sels">{{item}}</option>
+            </select>
+            <select name="selday" id="selday" v-model="dayselected" v-on:change="daySelect">
+                <option :value="n" v-for="n in 12">{{n}}</option>
+            </select>
         </div>
     </div>
     <link rel="stylesheet" href="css/calendar.css">

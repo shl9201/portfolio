@@ -10,7 +10,10 @@ $(function () {
             prevday: [],
             nextday: [],
             msg: '',
-            daymsg: ''
+            daymsg: '',
+            sels: [],
+            selected: moment().format('YYYY'),
+            dayselected: moment().format('M')
         },
         methods: {
             setLang: function () {
@@ -29,7 +32,6 @@ $(function () {
             },
             prevdate: function () {
                 var prev = this.m.subtract(1, 'months').calendar('ddd/MM/YYYY');
-                console.log(prev)
                 this.setdate(prev);
                 this.pushdate(prev);
                 this.chkday--;
@@ -44,7 +46,7 @@ $(function () {
             },
             setday: function (name) {
                 this.year = moment(name).format('YYYY');
-                this.month = moment(name).format('MMMM');
+                this.month = moment(name).format('MMM');
             },
             pushdate: function (name) {
                 var prevMonth = moment(name).subtract(1, 'months').calendar('ddd/MM/YYYY');
@@ -91,43 +93,49 @@ $(function () {
                     }
                 }
             },
-            serch: function () {
-                var re = /[~!@\#$%^&*\()\-=+_']/gi;
-                var eng = /[a-zA-Z]/;
-                var kor = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
+            setSelect: function () {
+                var m = moment();
+                var date1 = moment().format('YYYY');
+                var date2 = Number(date1) - 100;
+                var diffmiuns = Number(date1) - Number(date2);
+                for (var i = 0; i <= diffmiuns; i++) {
+                    this.sels.unshift(date1 + '')
+                    date1--;
+                }
 
-                if (this.msg.length > 4 || this.msg.length < 4 || re.test(this.msg) || eng.test(this.msg) || kor.test(this.msg)) {
-                    alert('숫자 4자리로 입력해주세요.');
-                    this.msg = '';
-                    this.$refs.search.focus();
-                } else {
-                    this.m = moment(this.msg);
-                    this.setdate(this.msg);
-                    this.pushdate(this.msg);
-                    this.today();
+                date1 = Number(moment().format('YYYY'));
+                var date3 = Number(date1) + 100;
+                var diffplus = Number(date3) - Number(date1);
+                for (var i = 0; i < diffplus; i++) {
+                    this.sels.push(date1 + 1 + '')
+                    date1++;
                 }
             },
-            dayserch: function () {
-                if (this.daymsg <= 0 || this.daymsg >= 13) {
-                    alert('1월~12월 까지 있습니다.');
-                    this.daymsg = '';
-                    this.$refs.daysearch.focus();
+            yearSelect: function () {
+                this.m = moment(this.selected);
+                this.setdate(this.selected);
+                this.pushdate(this.selected);
+                this.today();
+            },
+            daySelect: function () {
+                this.m = moment(this.selected + this.dayselected, 'YYYYMM');
+                var daynum = this.dayselected + '/' + moment(this.selected).format('DD') + '/' + moment(this.selected).format('YYYY');
+                if (this.dayselected.length == 1) {
+                    daynum = this.dayselected + '/' + moment(this.selected).format('DD') + '/' + moment(this.selected).format('YYYY');
                 } else {
-                    this.m = moment(this.msg);
-                    var num = moment(this.msg).format('YYYY') + '.' + this.daymsg + '.' + moment(this.msg).format('DD');
-                    console.log(num)
-                    this.setdate(num);
-                    this.pushdate(num);
-                    this.today();
+                    daynum = this.dayselected + '/' + moment(this.selected).format('DD') + '/' + moment(this.selected).format('YYYY');
                 }
-                this.daymsg = ''
+                this.setdate(daynum);
+                this.pushdate(daynum);
+                this.today();
             }
         },
         mounted: function () {
             this.setLang();
             this.setdate();
-            this.pushdate();
             this.today();
+            this.pushdate();
+            this.setSelect();
         }
     }).$mount('#app');
 
