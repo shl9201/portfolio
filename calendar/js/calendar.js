@@ -4,13 +4,11 @@ $(function () {
             days: [],
             year: '',
             month: '',
-            weekday: ["일", "월", "화", "수", "목", "금", "토"],
+            weekday: [],
             m: moment(),
             chkday: 1,
             prevday: [],
             nextday: [],
-            msg: '',
-            daymsg: '',
             sels: [],
             selected: moment().format('YYYY'),
             dayselected: moment().format('M')
@@ -21,6 +19,9 @@ $(function () {
                     weekdays: ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"],
                     weekdaysShort: ["일", "월", "화", "수", "목", "금", "토"],
                 });
+                for (var i = 0; i <= moment()._locale._config.week.doy; i++) {
+                    this.weekday[i] = moment()._locale._config.weekdaysShort[i];
+                }
             },
             setdate: function (name) {
                 var daylen = moment(name).daysInMonth();
@@ -122,6 +123,12 @@ $(function () {
                 }
                 this.setdate(daynum);
                 this.pushdate(daynum);
+            },
+            reset: function () {
+                var reset = moment().calendar('ddd/MM/YYYY');
+                this.m = moment(reset, 'YYYY/MM');
+                this.setdate(reset);
+                this.pushdate(reset);
             }
         },
         mounted: function () {

@@ -32,8 +32,10 @@
             </select>
             <select name="selday" id="selday" v-model="dayselected" v-on:change="daySelect">
                 <option :value="n" v-for="n in 12">{{n}}</option>
-            </select>
+            </select><br>
+            <button type="button" @click="reset" class="reset">today & reset</button>
         </div>
+
     </div>
     <link rel="stylesheet" href="css/calendar.css">
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>

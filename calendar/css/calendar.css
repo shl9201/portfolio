@@ -29,3 +29,4 @@ h2{text-shadow: 1px 3px #ccc;}
 #dayserch{margin-top:20px;}
 .sel{text-align: center;margin-top:30px;}
 .sel>p,.serch>p{padding-bottom: 10px;color:#cd3f3e;font-weight: 800;}
+.reset{display: inline-block;padding:5px 10px;background-color: #474747;color:#fff;border:none;outline: none;cursor: pointer;margin-top:10px;}
