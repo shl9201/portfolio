@@ -40,7 +40,7 @@ Vue.component("calender", {
             sels: [],
             selected: moment().format('YYYY'),
             dayselected: moment().format('M'),
-            isHidden: true,
+            isHidden: false,
             selecdate: '',
         }
     },
