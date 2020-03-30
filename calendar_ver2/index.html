@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Calendar</title>
+</head>
+
+<body>
+    <div id="app1">
+        <input type="text" class="date_input" v-model="dateArr.join(' ~ ')">
+        <a href="javascript:;" class="icon" @click="showDiv"><img src="images/icon.png" alt=""></a>
+        <div v-if="isHidden" class="contents">
+            <div class="sel">
+                <button type="button" @click="prevdate">◀</button>
+                <select name="sel" id="sel" v-model="selected" v-on:change="yearSelect">
+                    <option :value="item" v-for="item in sels">{{item}}</option>
+                </select>
+                <select name="selday" id="selday" v-model="dayselected" v-on:change="daySelect">
+                    <option :value="n" v-for="n in 12">{{n}}</option>
+                </select>
+                <button type="button" @click="nextdate">▶</button>
+            </div>
+            <ul class="list clearfix">
+                <li v-for="week in weekday">{{week}}</li>
+            </ul>
+            <ul class="list cont clearfix">
+                <li v-for="day in days" :class="day.class" @click="dateSelect($event)" :style="day.style">{{day.result}}
+                </li>
+            </ul>
+            <div class="reset_btn">
+                <button type="button" @click="reset" class="reset">today & reset</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 두 개 쓸 때 -->
+    <!-- <div id="app2">
+        <input type="text" class="date_input" v-model="dateArr.join(' ~ ')">
+        <a href="javascript:;" class="icon" @click="showDiv"><img src="images/icon.png" alt=""></a>
+        <div v-if="isHidden" class="contents">
+            <div class="sel">
+                <button type="button" @click="prevdate">◀</button>
+                <select name="sel" id="sel" v-model="selected" v-on:change="yearSelect">
+                    <option :value="item" v-for="item in sels">{{item}}</option>
+                </select>
+                <select name="selday" id="selday" v-model="dayselected" v-on:change="daySelect">
+                    <option :value="n" v-for="n in 12">{{n}}</option>
+                </select>
+                <button type="button" @click="nextdate">▶</button>
+            </div>
+            <ul class="list clearfix">
+                <li v-for="week in weekday">{{week}}</li>
+            </ul>
+            <ul class="list cont clearfix">
+                <li v-for="day in days" :class="day.class" @click="dateSelect($event)">{{day.result}}
+                </li>
+            </ul>
+            <div class="reset_btn">
+                <button type="button" @click="reset" class="reset">today & reset</button>
+            </div>
+        </div>
+    </div> -->
+    <link rel="stylesheet" href="css/calendar.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="http://code.jquery.com/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.0/moment.min.js"></script>
+    <script src="js/moment-width-locales.js"></script>
+    <script src="js/calendar.js"></script>
+</body>
+
+</html>
